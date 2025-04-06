@@ -9,8 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-gradient-start: #6a11cb;
-            --bg-gradient-end: #2575fc;
             --glass-bg: rgba(255, 255, 255, 0.15); /* White with low opacity */
             --glass-blur: 10px; /* Frosted glass effect */
             --glass-border-color: rgba(255, 255, 255, 0.2);
@@ -23,8 +21,10 @@
             font-family: 'Poppins', sans-serif;
             line-height: 1.7;
             color: var(--text-color);
-            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-            background-attachment: fixed; /* Keep gradient fixed during scroll */
+            background-image: url('https://4kwallpapers.com/images/wallpapers/gradient-background-6016x3384-11027.jpg');
+            background-size: cover; /* Make the image cover the entire background */
+            background-position: center; /* Center the image */
+            background-attachment: fixed; /* Keep background fixed during scroll */
             margin: 0;
             padding: 40px 20px; /* Add padding around the glass container */
             min-height: 100vh;
@@ -160,9 +160,7 @@
 
         <h2>Full User Agent String:</h2>
         <pre>{{ data['User Agent String'] }}</pre>
-    </div> <!-- End of glass-container -->
-
-    <div class="warning">
+    </div> <div class="warning">
         <strong>Privacy Warning:</strong> Collecting IP addresses and user agent details constitutes processing personal data under laws like GDPR. Ensure you have a valid legal basis (e.g., consent, legitimate interest) and a clear privacy policy informing users about this collection before deploying such functionality. Attempting to collect hardware details would further increase privacy concerns.
     </div>
 
@@ -176,7 +174,7 @@
             colorDepth: screen.colorDepth,
             // Maybe add others like navigator.language, navigator.hardwareConcurrency etc.
           };
-      
+
           // Send this data to the server
           fetch('/log-client-data', { // Need a new Flask route
             method: 'POST',
