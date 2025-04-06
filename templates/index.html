@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Info - Detected</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient-start: #6a11cb;
+            --bg-gradient-end: #2575fc;
+            --glass-bg: rgba(255, 255, 255, 0.15); /* White with low opacity */
+            --glass-blur: 10px; /* Frosted glass effect */
+            --glass-border-color: rgba(255, 255, 255, 0.2);
+            --text-color: #f0f0f0;
+            --text-color-strong: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            background-attachment: fixed; /* Keep gradient fixed during scroll */
+            margin: 0;
+            padding: 40px 20px; /* Add padding around the glass container */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Stack container and warning */
+            align-items: center; /* Center items horizontally */
+            justify-content: center; /* Center items vertically */
+            box-sizing: border-box;
+        }
+
+        .glass-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur)); /* Safari support */
+            border-radius: 15px;
+            border: 1px solid var(--glass-border-color);
+            padding: 30px 40px;
+            box-shadow: 0 8px 32px 0 var(--shadow-color);
+            max-width: 700px; /* Limit width for better readability */
+            width: 90%; /* Responsive width */
+            margin-bottom: 30px; /* Space before warning */
+            box-sizing: border-box;
+        }
+
+        h1, h2 {
+            color: var(--text-color-strong);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.4em;
+            border-bottom: 1px solid var(--glass-border-color);
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        strong {
+            /* Removed min-width, let natural flow work better */
+            color: var(--text-color-strong);
+            font-weight: 600; /* Slightly bolder */
+            margin-right: 8px; /* Add space after strong tag */
+        }
+
+        pre {
+            background-color: rgba(0, 0, 0, 0.2); /* Darker transparent background */
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border-color);
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            font-size: 0.9em;
+            margin-top: 10px;
+            max-height: 150px; /* Limit height and make scrollable */
+            overflow-y: auto; /* Add scrollbar if needed */
+            color: #e0e0e0; /* Lighter text for contrast */
+        }
+
+        .warning {
+            background-color: rgba(255, 100, 100, 0.7); /* More visible warning bg */
+            color: #fff;
+            font-weight: bold;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px 20px;
+            text-align: center;
+            max-width: 700px; /* Match container width */
+            width: 90%;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.1);
+        }
+        .warning strong {
+            color: #fff; /* Ensure strong tag is white too */
+        }
+
+        /* Simple scrollbar styling for webkit browsers */
+        pre::-webkit-scrollbar {
+            width: 8px;
+        }
+        pre::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        pre::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        pre::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="glass-container">
+        <h1>Your Detected Information</h1>
+        <p style="text-align: center; font-size: 0.9em;">This page demonstrates IP and basic device detection. This information has been logged.</p>
+
+        <p><strong>Timestamp:</strong> {{ data['Timestamp'] }}</p>
+        <p><strong>IP Address:</strong> {{ data['IP Address'] }}</p>
+
+        <h2>Device Type Flags</h2>
+        <p><strong>Is Bot:</strong> {{ data['Is Bot'] }}</p>
+        <p><strong>Is Mobile:</strong> {{ data['Is Mobile'] }}</p>
+        <p><strong>Is Tablet:</strong> {{ data['Is Tablet'] }}</p>
+        <p><strong>Is PC:</strong> {{ data['Is PC'] }}</p>
+        <p><strong>Is Touch Capable:</strong> {{ data['Is Touch Capable'] }}</p>
+
+        <h2>Browser</h2>
+        <p><strong>Browser:</strong> {{ data['Browser Family'] }} {{ data['Browser Version'] }}</p>
+
+        <h2>Operating System</h2>
+        <p><strong>Operating System:</strong> {{ data['OS Family'] }} {{ data['OS Version'] }}</p>
+
+        <h2>Device Info (from User Agent)</h2>
+        <p><strong>Device Family:</strong> {{ data['Device Family'] }}</p>
+        <p><strong>Device Brand:</strong> {{ data['Device Brand'] | default('N/A', true) }}</p>
+        <p><strong>Device Model:</strong> {{ data['Device Model'] | default('N/A', true) }}</p>
+
+        <h2>Other Header Info</h2>
+        <p><strong>Accept Language:</strong> {{ data['Accept Language'] | default('N/A', true) }}</p>
+        <p><strong>Do Not Track:</strong> {{ data['Do Not Track'] | default('Not Specified', true) }}</p>
+
+        <h2>Full User Agent String:</h2>
+        <pre>{{ data['User Agent String'] }}</pre>
+    </div> <!-- End of glass-container -->
+
+    <div class="warning">
+        <strong>Privacy Warning:</strong> Collecting IP addresses and user agent details constitutes processing personal data under laws like GDPR. Ensure you have a valid legal basis (e.g., consent, legitimate interest) and a clear privacy policy informing users about this collection before deploying such functionality. Attempting to collect hardware details would further increase privacy concerns.
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const clientData = {
+            screenWidth: screen.width,
+            screenHeight: screen.height,
+            viewportWidth: window.innerWidth,
+            viewportHeight: window.innerHeight,
+            colorDepth: screen.colorDepth,
+            // Maybe add others like navigator.language, navigator.hardwareConcurrency etc.
+          };
+      
+          // Send this data to the server
+          fetch('/log-client-data', { // Need a new Flask route
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              // Maybe include a session ID or token if needed to link requests
+            },
+            body: JSON.stringify(clientData)
+          }).then(response => {
+              console.log('Client data sent:', response.status);
+          }).catch(error => {
+              console.error('Error sending client data:', error);
+          });
+        });
+      </script>
+
+</body>
+</html>
